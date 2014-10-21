@@ -1,0 +1,12 @@
+# ignore .git changes
+./.git/*
+
+# ignore npm packages
+./node_modules/*
+
+# ignore front-end stuff
+./build/*
+./public/*
+
+# ignore tests
+./tests/*
