@@ -91,9 +91,8 @@ module.exports = function(grunt) {
 		},
 		nodemon: {
 			dev: {
-				options: {
-					file: 'app.js'
-				}
+				script: 'app.js',
+				ignore: ['node_modules/**', './.git/**', './build/**', './public/**', './tests/**']
 			}
 		},
 		concurrent: {
@@ -109,7 +108,8 @@ module.exports = function(grunt) {
 				// after bumping, update it so that the changelog task uses same version number
 				updateConfigs: ['pkg'],
 				// commit CHANGELOG.md as well
-				commitFiles: ['package.json', 'CHANGELOG.md']
+				commitFiles: ['package.json', 'CHANGELOG.md'],
+				pushTo: 'https://github.com/wayneparkes/ui.git'
 			}
 		},
 		changelog: {
@@ -141,6 +141,5 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('dev', ['build:debug', 'concurrent']);
 
-	// grunt.registerTask('notes', ['bump-only', 'changelog', 'bump-commit']);
-	grunt.registerTask('notes', ['bump-only', 'changelog']);
+	grunt.registerTask('notes', ['bump-only', 'changelog', 'bump-commit']);
 };

@@ -5,11 +5,15 @@ var path = require('path'),
 	fs = require('fs'),
 	app = http.createServer(function(req, res) {
 
-		var url = req.url === '/' ? '/index.html' : req.url,
-			filename = path.join(process.cwd(), 'build' + url);
+		var url = req.url === '/' ? 'index.html' : req.url,
+			// filename = path.join(process.cwd(), 'build' + url);
+			filename = path.join(process.cwd(), url);
+
+		// console.log('url: ', url);
+		// console.log('filename: ', filename);
 
 		fs.readFile(filename, { encoding: 'utf8' }, function (err, html) {
-			res.writeHead(200);
+			res.writeHead(200, {'content-type': 'text/html'});
 			res.end(html);
 		});
 	});
